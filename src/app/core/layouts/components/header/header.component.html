@@ -1,0 +1,87 @@
+<div class="card">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <!-- <div class="flex flex-row align-items-center gap-2">
+        <div>
+         
+        </div>
+        <div>
+          <h3 class="text-2xl my-0">Shoppy</h3>
+        </div>
+      </div> -->
+
+      <div class="flex flex-row align-items-center gap-2">
+        <div class="flex items-center justify-content-center">
+          <img
+            src="../../../../../assets/images/Cameologo.png"
+            class="w-6 h-6 object-contain"
+            alt="logo"
+          />
+          <!-- <img
+            src="../../../../../assets/images/camLogo.jpg"
+            class="w-6 h-6 object-contain"
+            alt="logo"
+          /> -->
+        </div>
+        <div
+          class="flex align-items-center justify-content-start align-content-center"
+        >
+          <img
+            src="../../../../../assets/images/SparkLogo1.png"
+            class="w-4 h-4 object-contain mb-2 mr-4 pr-4"
+            alt="logo"
+          />
+          <p-button
+            icon="pi pi-bars"
+            severity="secondary"
+            (onClick)="commonService.openSidebar.set(true)"
+            class="md:hidden block"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="item" let-item let-root="root">
+      <a pRipple class="flex align-items-center p-menuitem-link">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+        <p-badge
+          *ngIf="item.badge"
+          [ngClass]="{ 'ml-auto': !root, 'ml-2': root }"
+          [value]="item.badge"
+        />
+        <span
+          *ngIf="item.shortcut"
+          class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1"
+          >{{ item.shortcut }}</span
+        >
+        <i
+          *ngIf="item.items"
+          [ngClass]="[
+            'pi',
+            root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto'
+          ]"
+        ></i>
+      </a>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="flex align-items-center gap-4">
+        <!-- <p-button icon="pi pi-shopping-cart" badge="8" /> -->
+        <!-- <i
+          class="pi pi-shopping-cart mr-4 p-text-secondary cursor-pointer"
+          pBadge
+          style="font-size: 2rem"
+          [value]="cartService.cartItems().length"
+          (click)="goToCart()"
+        ></i> -->
+        <div>
+          <p-button [icon]="toggleThemeIcon" (click)="toggleDarkMode()" />
+        </div>
+        <p-avatar
+          class="cursor-pointer"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          shape="circle"
+        />
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

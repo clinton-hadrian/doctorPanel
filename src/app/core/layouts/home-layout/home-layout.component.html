@@ -1,0 +1,33 @@
+<div class="home-layout">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div
+      class="sidebar md:block hidden surface-100 relative"
+      [ngClass]="{
+        'width-250': !commonService.sidebarMinimized(),
+        'width-50': commonService.sidebarMinimized()
+      }"
+    >
+      <app-panel-menu></app-panel-menu>
+    </div>
+
+    <!-- Sidebar for mobile -->
+    <p-sidebar
+      [visible]="commonService.openSidebar()"
+      (onHide)="commonService.openSidebar.set(false)"
+      position="left"
+      class="block md:hidden"
+    >
+      <app-panel-menu></app-panel-menu>
+    </p-sidebar>
+
+    <!-- Main Content -->
+    <div class="content">
+      <router-outlet></router-outlet>
+      <p-scrollTop target="parent" [threshold]="100" icon="pi pi-arrow-up" />
+    </div>
+  </div>
+</div>

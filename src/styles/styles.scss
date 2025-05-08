@@ -1,0 +1,38 @@
+@import "primeng/resources/primeng.min.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+// @import "primeng/resources/themes/lara-light-blue/theme.css";
+//@import "primeng/resources/themes/lara-light-purple/theme.css";
+// @import "primeng/resources/themes/saga-blue/theme.css";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+form {
+  all: unset; // Resets all inherited browser styles
+  display: contents; // So it doesn't act as a block element
+}
+
+// .p-accordion-header.p-disabled {
+//   opacity: 1 !important;
+//   pointer-events: visiblePainted !important;
+// }
+
+// .p-accordion .p-accordion-header .p-accordion-header-link {
+//   opacity: 1 !important;
+//   pointer-events: auto !important;
+// }
+
+// form {
+//   border: none;
+//   padding: 0;
+//   margin: 0;
+//   background: none;
+// }

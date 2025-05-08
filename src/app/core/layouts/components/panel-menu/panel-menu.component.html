@@ -1,0 +1,68 @@
+<div
+  class="flex justify-content-center flex-column align-content-center w-full"
+>
+  <div
+    *ngIf="!commonService.sidebarMinimized()"
+    class="flex align-items-center gap-2"
+  >
+    <div
+      *ngIf="profileName"
+      class="flex justify-content-center align-items-center flex-row mb-3"
+    >
+      <p-avatar
+        class="cursor-pointer md:block hidden"
+        [icon]="getToggleIcon()"
+        styleClass="mr-2"
+        [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+        (click)="
+          commonService.sidebarMinimized.set(!commonService.sidebarMinimized())
+        "
+      />
+      <p-avatar
+        class="md:hidden block"
+        icon="pi pi-user"
+        styleClass="mr-2"
+        [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+      />
+      <span class="text-lg"
+        >{{ greetingMessage }}, {{ profileName | titlecase }}</span
+      >
+    </div>
+  </div>
+  <p-panelMenu
+    *ngIf="!commonService.sidebarMinimized()"
+    [model]="items"
+    [multiple]="true"
+    styleClass="w-full h-full "
+  />
+
+  <!-- toggled panel content -->
+  <div
+    *ngIf="commonService.sidebarMinimized()"
+    class="flex align-items-center justify-content-center flex-column row-gap-6 md:block hidden"
+  >
+    <div>
+      <p-avatar
+        [icon]="getToggleIcon()"
+        styleClass="cursor-pointer mb-3"
+        [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+        (click)="
+          commonService.sidebarMinimized.set(!commonService.sidebarMinimized())
+        "
+      />
+    </div>
+    <div
+      *ngFor="let item of visibleItems; let i = index"
+      class="flex flex-column align-items-center mb-3"
+      [ngClass]="{ 'border-top': i === 0 }"
+    >
+      <p-avatar
+        [pTooltip]="item.label"
+        [icon]="item.icon"
+        styleClass="cursor-pointer"
+        [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+        (click)="item.command()"
+      />
+    </div>
+  </div>
+</div>

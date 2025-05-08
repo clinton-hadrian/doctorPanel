@@ -1,0 +1,167 @@
+<div class="card">
+  <p-table
+    #dt
+    [value]="doctorList"
+    [rows]="rows"
+    [paginator]="true"
+    [globalFilterFields]="['id', 'name', 'specialization', 'contact', 'Status']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true"
+    dataKey="id"
+    [totalRecords]="totalRecords"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} "
+    [lazy]="true"
+    [showCurrentPageReport]="true"
+    selectionMode="single"
+    styleClass="p-datatable-gridlines"
+    [resizableColumns]="true"
+    [columns]="cols"
+    [exportHeader]="'doctorExportHeader'"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    (onLazyLoad)="pageChange($event)"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <div class="flex justify-content-center align-items-center">
+          <span class="m-0 text-2xl">Doctor List</span>
+          <p-button
+            type="button"
+            pTooltip="Reload doctor list"
+            tooltipPosition="bottom"
+            icon="pi pi-refresh"
+            (onClick)="reloadDoctorList()"
+            styleClass="p-button-text ml-2"
+          />
+        </div>
+        <div class="flex flex-row column-gap-2">
+          <form [formGroup]="filterForm">
+            <p-iconField iconPosition="left">
+              <p-inputIcon>
+                <i class="pi pi-search"></i>
+              </p-inputIcon>
+
+              <input
+                formControlName="searchText"
+                pInputText
+                type="text"
+                placeholder="Search.."
+              />
+            </p-iconField>
+            <p-dropdown
+              [options]="statuses"
+              formControlName="statusFilter"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Filter by status"
+            />
+          </form>
+
+          <p-button
+            (click)="openDoctorForm()"
+            severity="success"
+            label="Add doctor"
+            icon="pi pi-user-plus"
+          />
+          <p-button
+            pTooltip="Download doctor list"
+            tooltipPosition="bottom"
+            (click)="dt.exportCSV()"
+            severity="help"
+            icon="pi pi-download"
+          />
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.field"
+          pResizableColumn
+        >
+          {{ col.header }}
+          <p-sortIcon
+            *ngIf="col.field != 'action' && col.field != 'view'"
+            [field]="col.field"
+          />
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-doctor let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          <span class="p-column-title">{{ col.header }}</span>
+          @if(col.field=='available'){
+          <p-tag
+            [severity]="fs.getSeverity(doctor[col.field])"
+            [icon]="fs.getTagIcon(doctor[col.field])"
+            [value]="fs.getTagValue(doctor[col.field])"
+          />
+          } @else if(col.field=='action'){
+          <p-button
+            icon="pi pi-pencil"
+            class="mr-2"
+            [rounded]="true"
+            severity="info"
+            pTooltip="Edit"
+            tooltipPosition="bottom"
+            (click)="openDoctorForm(doctor, true)"
+          />
+          <p-button
+            icon="pi pi-trash"
+            severity="danger"
+            [rounded]="true"
+            pTooltip="Remove"
+            tooltipPosition="bottom"
+            (click)="deleteDoctor(doctor['id'])"
+          />
+          } @else if(col.field=='view'){
+          <p-button
+            icon="pi pi-eye"
+            severity="primary"
+            [rounded]="true"
+            pTooltip="view doctor"
+            tooltipPosition="bottom"
+            (click)="viewDoctor(doctor)"
+          />
+          } @else{
+          {{
+            col.field == "CreatedOn"
+              ? (doctor[col.field] | date : "dd/MM/yyyy hh:mm a")
+              : doctor[col.field]
+          }}
+          }
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No doctor Found!</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there
+        {{
+          doctorList
+            ? doctorList.length == 1
+              ? "is " + doctorList.length + " doctor."
+              : "are " + doctorList.length + " doctors."
+            : ""
+        }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<app-display-dialog
+  #termsDialog
+  [header]="dialog.title"
+  [icon]="dialog.icon"
+  [showHeader]="true"
+>
+  @if(dialog.type == 'doctorDetails'){
+  <app-view-doctor [doctor]="selectedDoctor" />
+  }@else{ <app-doctor-form [doctorId] = "selectedDoctorId" (closeDialog)="closeDialog()" /> }
+</app-display-dialog>

@@ -1,0 +1,5 @@
+@import "../../../../../styles/custom-otp.scss";
+
+:host ::ng-deep .p-button.p-button-link {
+  padding: 0;
+}

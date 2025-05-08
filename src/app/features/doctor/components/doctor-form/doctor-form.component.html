@@ -1,0 +1,75 @@
+<form action="" [formGroup]="doctorForm">
+  <div class="formgrid grid">
+    <div class="field col-12 md:col-6">
+      <label>Name</label>
+      <input
+        pInputText
+        class="w-full"
+        [style]="{ width: '100%' }"
+        formControlName="name"
+        placeholder="Enter doctor name"
+        [ngClass]="{
+          'ng-invalid ng-dirty': fs.hasError(doctorForm, 'name')
+        }"
+      />
+      <small *ngIf="fs.hasError(doctorForm, 'name')" class="text-red-500">
+        {{ fs.getErrorMessage(doctorForm, "name") }}
+      </small>
+    </div>
+    <div class="field col-12 md:col-6">
+      <label>Spacialization</label>
+      <input
+        pInputText
+        class="w-full"
+        [style]="{ width: '100%' }"
+        formControlName="specialization"
+        placeholder="Enter doctor specialization"
+        [ngClass]="{
+          'ng-invalid ng-dirty': fs.hasError(doctorForm, 'specialization')
+        }"
+      />
+      <small
+        *ngIf="fs.hasError(doctorForm, 'specialization')"
+        class="text-red-500"
+      >
+        {{ fs.getErrorMessage(doctorForm, "specialization") }}
+      </small>
+    </div>
+    <div class="field col-12">
+      <label>Mobile number</label>
+      <input
+        maxlength="10"
+        pInputText
+        [appOnlyNumber]="true"
+        class="w-full"
+        [style]="{ width: '100%' }"
+        formControlName="contact"
+        placeholder="Enter contact number"
+        [ngClass]="{
+          'ng-invalid ng-dirty': fs.hasError(doctorForm, 'contact')
+        }"
+      />
+      <small *ngIf="fs.hasError(doctorForm, 'contact')" class="text-red-500">
+        {{ fs.getErrorMessage(doctorForm, "contact") }}
+      </small>
+    </div>
+    <div class="field col-12 md:col-6 align-items-center flex gap-2">
+      <p-checkbox
+        [binary]="true"
+        formControlName="available"
+        [ngClass]="{
+          'ng-invalid ng-dirty': fs.hasError(doctorForm, 'available')
+        }"
+      />
+      <label class="my-auto">Available</label>
+    </div>
+    <div class="mt-3 w-full flex justify-content-center align-items-center">
+      <p-button
+        label="done"
+        icon="pi pi-check"
+        iconPos="right"
+        (click)="formSubmit()"
+      />
+    </div>
+  </div>
+</form>
