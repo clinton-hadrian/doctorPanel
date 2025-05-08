@@ -134,7 +134,6 @@ export class DoctorListComponent implements OnInit {
     this.dialog.type = `doctor${isEdit ? 'Edit' : 'Add'}`;
     this.dialog.icon = `pi pi-${isEdit ? 'user-edit' : 'user-plus'}`;
     this.selectedDoctorId = 0;
-
     this.selectedDoctorId = doctor?.id;
     console.log('SETTTT', this.selectedDoctorId);
   }

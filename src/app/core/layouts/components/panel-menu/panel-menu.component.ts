@@ -39,47 +39,7 @@ export class PanelMenuComponent implements OnInit {
         icon: 'pi pi-compass',
         expanded: true,
         items: [
-          {
-            label: 'Enquiry Received',
-            icon: 'pi pi-search',
-            command: () => {
-              this.onCommand('customerList');
-            },
-            visible: this.commonService.hasRoles('USER', 'ADMIN'),
-          },
-
-          {
-            label: 'Register',
-            icon: 'pi pi-pen-to-square',
-            command: () => {
-              this.onCommand('rif');
-            },
-            visible: this.commonService.hasRoles('CUSTOMER', 'USER', 'ADMIN'),
-          },
-          {
-            label: "List Of RIF's",
-            icon: 'pi pi-list',
-            command: () => {
-              this.onCommand('rifList');
-            },
-            visible: this.commonService.hasRoles('CUSTOMER', 'USER', 'ADMIN'),
-          },
-          {
-            label: 'Report',
-            icon: 'pi pi-file',
-            command: () => {
-              this.onCommand('report');
-            },
-            visible: this.commonService.hasRoles('USER', 'ADMIN'),
-          },
-          {
-            label: 'Payment Check',
-            icon: 'pi pi-verified',
-            command: () => {
-              this.onCommand('paymentCheck');
-            },
-            visible: this.commonService.hasRoles('USER', 'ADMIN'),
-          },
+         
           {
             label: 'Doctor List',
             icon: 'pi pi-list',

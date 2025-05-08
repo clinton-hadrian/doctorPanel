@@ -1,6 +1,8 @@
 import {
   Component,
+  effect,
   input,
+  Input,
   OnChanges,
   OnInit,
   output,
@@ -30,6 +32,7 @@ import { DoctorService } from '../../doctor.service';
 export class DoctorFormComponent implements OnInit, OnChanges {
   doctorForm!: FormGroup;
   doctorId = input<number>(0);
+  // @Input() doctorId: number = 0;
   closeDialog = output<void>();
 
   constructor(
@@ -41,7 +44,6 @@ export class DoctorFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['doctorId'] && changes['doctorId'].currentValue) {
-      console.log('AAAAAAAAAAAA', this.doctorId());
       this.getDoctorData();
     }
   }
@@ -72,11 +74,7 @@ export class DoctorFormComponent implements OnInit, OnChanges {
 
   formSubmit() {
     if (this.doctorForm.valid) {
-      console.log('Form submitted:', this.doctorForm.value);
-      console.log('doc id:', this.doctorId());
-
       if (this.doctorId() && this.doctorId() != 0) {
-        console.log('YYYYYYYYYYYYYYyy:', this.doctorId());
         this.doctorService.updateDoctor(this.doctorId(), this.doctorForm.value);
         this.doctorForm.reset();
       } else {

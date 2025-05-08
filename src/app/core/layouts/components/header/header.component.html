@@ -10,34 +10,30 @@
         </div>
       </div> -->
 
-      <div class="flex flex-row align-items-center gap-2">
-        <div class="flex items-center justify-content-center">
+      <div class="flex flex-row align-items-start gap-2">
+        <div class="flex align-items-start justify-content-start">
           <img
-            src="../../../../../assets/images/Cameologo.png"
-            class="w-6 h-6 object-contain"
+            src="../../../../../assets/svg/health.svg"
+            class="w-1 h-1 object-contain"
             alt="logo"
           />
-          <!-- <img
-            src="../../../../../assets/images/camLogo.jpg"
-            class="w-6 h-6 object-contain"
-            alt="logo"
-          /> -->
-        </div>
-        <div
-          class="flex align-items-center justify-content-start align-content-center"
-        >
-          <img
-            src="../../../../../assets/images/SparkLogo1.png"
-            class="w-4 h-4 object-contain mb-2 mr-4 pr-4"
-            alt="logo"
-          />
+          <h3 class="text-2xl my-auto mx-4">DocZone</h3>
           <p-button
             icon="pi pi-bars"
             severity="secondary"
             (onClick)="commonService.openSidebar.set(true)"
             class="md:hidden block"
-          />
+          ></p-button>
         </div>
+        <!-- <div class="flex align-items-start justify-content-start gap-2">
+          <h3 class="text-2xl my-0">DocZone</h3>
+          <p-button
+            icon="pi pi-bars"
+            severity="secondary"
+            (onClick)="commonService.openSidebar.set(true)"
+            class="md:hidden block"
+          ></p-button>
+        </div> -->
       </div>
     </ng-template>
     <ng-template pTemplate="item" let-item let-root="root">

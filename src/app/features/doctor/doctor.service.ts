@@ -62,11 +62,9 @@ export class DoctorService {
   }
 
   addDoctor(doctor: Omit<Doctor, 'id'>): void {
-    console.log('doctors add');
     const doctors = this.getData();
     const newDoctor: Doctor = { id: Date.now(), ...doctor };
     doctors.push(newDoctor);
-    console.log('doctors', doctors);
     this.setData(doctors);
   }
 

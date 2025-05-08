@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   getInfo() {
-    const info = JSON.parse(sessionStorage.getItem('INFO') || '{}')[0];
+    const info = JSON.parse(sessionStorage.getItem('INFO') || '{}');
     const role = sessionStorage.getItem('ROLE') || '';
 
     return {
